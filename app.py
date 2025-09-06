@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 # 언어별 라이브러리
-from konlpy.tag import Okt
+#from konlpy.tag import Okt
+import re
 import jieba
 from janome.tokenizer import Tokenizer
 from nltk.corpus import stopwords
@@ -17,7 +18,7 @@ nltk.download("punkt")
 nltk.download("stopwords")
 
 # 한국어/일본어 객체
-okt = Okt()
+#okt = Okt()
 janome_tagger = Tokenizer()
 
 # ✅ 불용어 사전
@@ -25,6 +26,11 @@ stopwords_ko = {"것","수","등","들","및","에서","하다","까지","부터
 stopwords_ja = {"こと","これ","それ","ため","よう","もの","さん","して","いる","ある","なる","また","そして","しかし"}
 stopwords_zh = {"的","了","在","是","我","有","和","就","不","人","都","一个","上","也","很","到","说","要","去","你"}
 stopwords_en = set(stopwords.words("english")) | {"said","one","like","also","would","could","us","many","new","people"}
+
+# 한국어 토큰화 (Okt 대신 정규식 기반)
+def tokenize_korean(text):
+    tokens = re.findall(r"[가-힣]+", text)  # 한글만 추출
+    return [t for t in tokens if t not in stopwords_ko]
 
 def build_query(include_terms=None, exclude_terms=None, mode="AND"):
     query_parts = []
@@ -59,8 +65,9 @@ def fetch_news(query, site=None, lang="en", region="US"):
 def tokenize_and_clean(text, lang):
     tokens = []
     if lang == "ko":
-        tokens = [w for w, pos in okt.pos(text) if pos in ["Noun", "Adjective"]]
-        tokens = [w for w in tokens if w not in stopwords_ko]
+        #tokens = [w for w, pos in okt.pos(text) if pos in ["Noun", "Adjective"]]
+        #tokens = [w for w in tokens if w not in stopwords_ko]
+        tokens = tokenize_korean(text)
     elif lang == "ja":
         tokens = [t.surface for t in janome_tagger.tokenize(text) 
                   if t.part_of_speech.startswith("名詞") or t.part_of_speech.startswith("形容詞")]
