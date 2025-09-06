@@ -14,7 +14,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import nltk
 
-nltk.download("punkt")
+#nltk.download("punkt")
 nltk.download("stopwords")
 
 # 한국어/일본어 객체
@@ -127,4 +127,5 @@ if st.button("워드 클라우드 생성 Submit Here ▶ "):
         ax.imshow(wc, interpolation="bilinear")
         ax.axis("off")
         st.pyplot(fig)
+
         st.success(f"✅ {len_docs}개의 뉴스에서 단어를 추출했습니다.")
