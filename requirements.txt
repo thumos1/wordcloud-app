@@ -4,6 +4,7 @@ langdetect
 wordcloud
 matplotlib
 nltk
-konlpy
+re
 jieba
 janome
+
