@@ -14,6 +14,22 @@
 ## ⚙️ 설치 방법
 
 ### 1. 저장소 클론
-```bash
 git clone https://github.com/thumos1/wordcloud-app.git
 cd wordcloud-app
+
+### 2. 가상환경 생성(권장)
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+
+### 3. 필요 라이브러리 설치
+pip install -r requirements.txt
+
+### 4. 실행방법
+streamlit run app.py
+
+### 5. 프로젝트구조
+wordcloud-app/
+│── app.py                # Streamlit 앱 코드
+│── requirements.txt      # 패키지 목록
+└── README.md             # 프로젝트 설명
