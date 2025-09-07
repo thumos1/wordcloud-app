@@ -3,7 +3,7 @@ feedparser
 langdetect
 wordcloud
 matplotlib
-nltk
+nltk==3.8.1
 jieba
 janome
 

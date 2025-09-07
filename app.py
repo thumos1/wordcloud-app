@@ -14,7 +14,7 @@ from janome.tokenizer import Tokenizer
 from nltk.tokenize import word_tokenize
 import nltk
 
-#nltk.download("punkt")
+nltk.download("punkt")
 #nltk.download("stopwords")
 
 # 한국어/일본어 객체
