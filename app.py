@@ -10,12 +10,11 @@ from collections import Counter
 import re
 import jieba
 from janome.tokenizer import Tokenizer
-from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import nltk
 
-nltk.download("punkt")
-nltk.download("stopwords")
+#nltk.download("punkt")
+#nltk.download("stopwords")
 
 # 한국어/일본어 객체
 #okt = Okt()
@@ -25,7 +24,21 @@ janome_tagger = Tokenizer()
 stopwords_ko = {"것","수","등","들","및","에서","하다","까지","부터","그리고","그러나","때문","이것","저것","그것"}
 stopwords_ja = {"こと","これ","それ","ため","よう","もの","さん","して","いる","ある","なる","また","そして","しかし"}
 stopwords_zh = {"的","了","在","是","我","有","和","就","不","人","都","一个","上","也","很","到","说","要","去","你"}
-stopwords_en = set(stopwords.words("english")) | {"said","one","like","also","would","could","us","many","new","people"}
+# 영어 불용어 수동 정의 (필요하면 확장 가능)
+stopwords_en = {
+    "i","me","my","myself","we","our","ours","ourselves","you","your","yours",
+    "yourself","yourselves","he","him","his","himself","she","her","hers",
+    "herself","it","its","itself","they","them","their","theirs","themselves",
+    "what","which","who","whom","this","that","these","those","am","is","are",
+    "was","were","be","been","being","have","has","had","having","do","does",
+    "did","doing","a","an","the","and","but","if","or","because","as","until",
+    "while","of","at","by","for","with","about","against","between","into",
+    "through","during","before","after","above","below","to","from","up","down",
+    "in","out","on","off","over","under","again","further","then","once","here",
+    "there","when","where","why","how","all","any","both","each","few","more",
+    "most","other","some","such","no","nor","not","only","own","same","so",
+    "than","too","very","s","t","can","will","just","don","should","now"
+} | {"said","one","like","also"}  # 커스텀 추가
 
 # 한국어 토큰화 (Okt 대신 정규식 기반)
 def tokenize_korean(text):
@@ -129,4 +142,5 @@ if st.button("워드 클라우드 생성 Submit Here ▶ "):
         st.pyplot(fig)
 
         st.success(f"✅ {len_docs}개의 뉴스에서 단어를 추출했습니다.")
+
 
