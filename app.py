@@ -109,7 +109,7 @@ def run_pipeline(query, site=None, lang="en", region="US"):
 # ===============================
 st.title("🌏 다국어 뉴스 워드클라우드")
 
-query1 = st.text_input("검색어를 콤마로 분리해서 입력하세요", "김주애").split(",")
+query1 = st.text_input("검색어를 콤마로 분리해서 입력하세요", "트럼프").split(",")
 query2 = st.text_input("검색 배제 단어를 콤마로 분리해서 입력하세요", "").split(",")
 
 query = build_query(include_terms=query1, exclude_terms=query2, mode="AND")
