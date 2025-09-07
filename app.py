@@ -8,6 +8,7 @@ from collections import Counter
 # 언어별 라이브러리
 #from konlpy.tag import Okt
 import re
+import os
 import jieba
 from janome.tokenizer import Tokenizer
 from nltk.tokenize import word_tokenize
@@ -128,9 +129,9 @@ if st.button("워드 클라우드 생성 Submit Here ▶ "):
     if not freq:
         st.warning("⚠️ 뉴스에서 단어를 찾지 못했습니다. 다른 검색어를 입력하세요.")
     else:
-        # ✅ 운영체제에 맞는 폰트 경로 지정 (윈도우 기본값)
-        font_path = "C:/Windows/Fonts/malgun.ttf"
-
+        # 워드클라우드 생성
+        # Windows에서 한글/일본어/중국어 폰트 문제 해결
+        font_path = os.path.join(os.path.dirname(__file__), "fonts", "NotoSansCJK-VF.otf.ttc")
         wc = WordCloud(
             font_path=font_path,
             width=800, height=600, background_color="white"
