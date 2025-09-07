@@ -54,3 +54,7 @@
   │── requirements.txt      # 패키지 목록
 
   └── README.md             # 프로젝트 설명
+  
+  ├── fonts/
+  
+  │   └── NotoSansCJK-VF.otf.ttc
