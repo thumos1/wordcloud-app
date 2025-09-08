@@ -115,14 +115,10 @@ query2 = st.text_input("검색 배제 단어를 콤마로 분리해서 입력하
 query = build_query(include_terms=query1, exclude_terms=query2, mode="AND")
 print(f"▶ 최종 검색어: {query}")
 
-col1, col2 = st.columns([1, 1])  
 
-with col1:
-    lang = st.selectbox("언어", ["한국어", "일본어", "중국어", "영어"])
-    lang_option = {"한국어":"ko", "일본어":"ja", "중국어":"zh-CN", "영어":"en"}[lang]
-with col2:
-    region = st.selectbox("지역", ["한국", "일본", "중국", "미국"])
-    region_option = {"한국":"KR", "일본":"JP", "중국":"CN", "미국":"US"}[region]
+lang = st.selectbox("언어", ["한국어", "일본어", "중국어", "영어"])
+lang_option = {"한국어":("ko", "KR"), "일본어":("ja", "JP"), "중국어":("zh-CN", "CN"), "영어":("en", "US")}[lang][0]
+region_option = {"한국어":("ko", "KR"), "일본어":("ja", "JP"), "중국어":("zh-CN", "CN"), "영어":("en", "US")}[lang][1]
 
 if st.button("워드 클라우드 생성 Submit Here ▶ "):
     freq, len_docs = run_pipeline(query, lang=lang_option, region=region_option)
